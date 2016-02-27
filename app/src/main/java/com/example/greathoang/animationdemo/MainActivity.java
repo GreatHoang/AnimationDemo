@@ -1,13 +1,13 @@
 package com.example.greathoang.animationdemo;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,38 +15,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
+        RelativeLayout relativeLayoutMayBay = (RelativeLayout) findViewById(R.id.rlMayBay);
+        TextView textViewTranslate = (TextView) findViewById(R.id.txtTransition);
+        ImageView imageViewRotate = (ImageView) findViewById(R.id.imageRotate);
+        ImageView imageViewScaleBlack = (ImageView) findViewById(R.id.imageScaleBlack);
+        ImageView imageViewScaleWhite = (ImageView) findViewById(R.id.imageScaleWhite);
+        TextView textViewFaceOut = (TextView) findViewById(R.id.txtFaceOut);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        TranslateAnimation translateYAnimation = new TranslateAnimation(0f, 0f, 0f, -2200f);
+        translateYAnimation.setDuration(5000l);
+        translateYAnimation.setRepeatCount(Animation.INFINITE);
+        translateYAnimation.setRepeatMode(Animation.REVERSE);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        TranslateAnimation translateXAnimation = new TranslateAnimation(0f, 1000f, 0f, 0f);
+        translateXAnimation.setDuration(2000l);
+        translateXAnimation.setRepeatMode(Animation.RESTART);
+        translateXAnimation.setRepeatCount(Animation.INFINITE);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        Animation animationRotale = AnimationUtils.loadAnimation(this, R.anim.rotate);
 
-        return super.onOptionsItemSelected(item);
+        Animation animationScaleOut = AnimationUtils.loadAnimation(this, R.anim.scale_out);
+
+        Animation animationFaceOut = AnimationUtils.loadAnimation(this, R.anim.face_out);
+
+
+        relativeLayoutMayBay.startAnimation(translateYAnimation);
+        textViewTranslate.startAnimation(translateXAnimation);
+        imageViewRotate.startAnimation(animationRotale);
+        imageViewScaleBlack.startAnimation(animationScaleOut);
+        imageViewScaleWhite.startAnimation(animationScaleOut);
+        textViewFaceOut.startAnimation(animationFaceOut);
     }
 }
