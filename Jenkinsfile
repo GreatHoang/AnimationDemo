@@ -4,6 +4,7 @@ pipeline {
 		stage('build') {
 			steps {
 				sh 'mvn --version'
+				sh 'echo "Say hello with First Pipeline"'
 			}
 		}
 	}
