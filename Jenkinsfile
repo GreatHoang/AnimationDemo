@@ -15,6 +15,7 @@ pipeline {
 					echo "Multiline shell steps works too"
 					ls -lah
 				'''
+				sh 'chmod +x gradlew'
 				sh './gradlew build'
 			}
 		}
