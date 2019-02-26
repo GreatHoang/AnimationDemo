@@ -4,6 +4,7 @@ pipeline {
 	environment {
 		DISABLE_AUTH = 'true'
 		DB_ENGINE = 'sqlite'
+		NAME = 'newbie'
 	}
 
 	stages {
@@ -28,6 +29,7 @@ pipeline {
 		stage('environment') {
 			steps {
 				sh 'printenv'
+				sh 'echo "show name: $NAME"'
 			}
 		}
 	}
