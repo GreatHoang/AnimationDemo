@@ -16,7 +16,6 @@ pipeline {
 					ls -lah
 				'''
 				sh 'chmod +x gradlew'
-				sh './gradlew build'
 			}
 		}
 		stage('deploy') {
@@ -48,9 +47,11 @@ pipeline {
 		}
 		success {
 			echo 'This will run only if successful'
+			mail to: 'tran.thanh.nghia@framgia.com', subject: "Build success from First Pipeline", body: "Wow, build succcessed!!!"
 		}
 		failure {
 			echo 'This will run only if failed'
+			mail to: 'tran.thanh.nghia@framgia.com', subject: "Build failure from First Pipeline", body: "Oops build failured!"
 		}
 		unstable {
 			echo 'This will run only if the run was marked as unstable'
