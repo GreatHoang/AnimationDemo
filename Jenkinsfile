@@ -16,7 +16,7 @@ pipeline {
 					retry(5) {
 						sh './flakey-deploy.sh'
 					}
-				}d
+				}
 			}
 		}
 	}
