@@ -32,10 +32,16 @@ pipeline {
 				sh 'echo "show name: $NAME"'
 			}
 		}
+		stage('test') {
+			steps {
+				sh './gradlew check'
+			}
+		}
 	}
 	post {
 		always {
 			echo 'This will always run'
+			junit 'build/reports/**/*.xml'
 		}
 		success {
 			echo 'This will run only if successful'
